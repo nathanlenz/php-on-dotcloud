@@ -1,0 +1,16 @@
+php:
+    type: custom
+    buildscript: php/builder
+    approot: hellophp
+    systempackages:
+        # needed for the Nginx rewrite module
+        - libpcre3-dev
+        # these are used so we can install the deps for the php compile
+        - php5-dev 
+        - libxml2-dev
+        - bzip2
+    ports:
+        www: http
+    processes:
+        nginx: nginx
+        fpm: ~/php-fpm.sh

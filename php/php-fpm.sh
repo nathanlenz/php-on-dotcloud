@@ -1,0 +1,1 @@
+/home/dotcloud/php-env/sbin/php-fpm --fpm-config /home/dotcloud/conf/php-fpm.conf
