@@ -58,7 +58,6 @@ install_php() {
           msg "trying to compile php, and then install it"
           #TODO the configure params need to be optimized and cleaned up. not everything here, need to add more?
               ./configure --prefix=$php_install_dir \
-              --enable-embed \
               --enable-fpm \
               --with-regex=php \
               --disable-rpath \
@@ -174,6 +173,9 @@ install_application() {
 
     msg "moving $BUILDERDIR/php-fpm.conf to $conf_dir"
     mv $BUILDERDIR/php-fpm.conf $conf_dir/
+    
+    msg "cleaning up ($stage_dir) since it is no longer needed."
+    rm -rf $stage_dir
 
     # Use ~/code and ~/current like the regular python service for better compatibility
     msg "installing application to ~/current/ from $start_dir"
