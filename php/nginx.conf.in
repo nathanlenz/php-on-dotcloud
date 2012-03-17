@@ -56,15 +56,16 @@ server {
 
     include /home/dotcloud/current/*nginx.conf;
 
-    location ~ .+\.php$ {
+    location ~* \.php$ {
         if ( -f /home/dotcloud/current/maintenance) {
             return 503;
         }
 
         try_files       $uri /static/404.html;
-
+        fastcgi_index   index.php;
         fastcgi_pass    unix:/var/dotcloud/php5-fpm.sock;
         include         fastcgi_params;
+        fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
         include         /home/dotcloud/current/*fastcgi.conf;
     }
 
