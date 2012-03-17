@@ -10,7 +10,8 @@ nginx_install_dir="$HOME/nginx"
 stage_dir="$start_dir/tmp"
 nginx_stage_dir="$stage_dir/stage"
 nginx_download_url="http://nginx.org/download/nginx-1.0.14.tar.gz"  #TODO configurable?
-php_download_url="http://www.php.net/get/php-5.4.0.tar.gz/from/us.php.net/mirror"
+#php_download_url="http://www.php.net/get/php-5.4.0.tar.gz/from/us.php.net/mirror" #php 5.4
+php_download_url=http://www.php.net/get/php-5.3.10.tar.gz/from/us.php.net/mirror #php 5.3.10
 php_stage_dir="$start_dir/stage/php"
 php_install_dir="$HOME/php-env"
 conf_dir="$HOME/conf"
@@ -32,7 +33,13 @@ move_to_approot() {
 install_php() {
    msg "installing php into: $php_download_url"
   
-      if [ ! -d $php_install_dir ] ; then
+      #if [ ! -d $php_install_dir ] ; then
+      
+        if [ -d $php_install_dir ] ; then
+          rm -rf $php_install_dir
+        fi
+      ##
+      #
           msg "making directory: $php_install_dir "
           mkdir -p $php_install_dir
 
@@ -81,9 +88,9 @@ install_php() {
           msg "change directories back to $start_dir"
           cd $start_dir
      
-      else
+     #else
           msg "php already installed, skipping this step."
-      fi
+     # fi
 }
 
 
